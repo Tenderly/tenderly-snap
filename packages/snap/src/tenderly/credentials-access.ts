@@ -45,6 +45,8 @@ export async function handleUpdateTenderlyCredentials(origin: string) {
       newState: tenderlyAccess,
     },
   });
+
+  return null;
 }
 
 /**
