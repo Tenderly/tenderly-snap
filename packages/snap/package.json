@@ -29,6 +29,7 @@
   "dependencies": {
     "@metamask/snaps-types": "^0.32.2",
     "@metamask/snaps-ui": "^0.32.2",
+    "@metamask/utils": "^7.1.0",
     "buffer": "^6.0.3"
   },
   "devDependencies": {
