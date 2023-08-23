@@ -7,7 +7,7 @@
     "url": "https://github.com/tenderly/tenderly-snap.git"
   },
   "source": {
-    "shasum": "5Y+/tHUKjoYnNNXVlE0BnG4Rd+ceCbSZMfRBRQGeccM=",
+    "shasum": "BPJKZcxeCR2PGW/NMF4saTh1gkDWsE5FejoUDy7/DFs=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

@@ -1,7 +1,7 @@
-import { panel, text, Panel, divider, heading } from '@metamask/snaps-ui';
+import { divider, heading, panel, Panel, text } from '@metamask/snaps-ui';
 import { Json } from '@metamask/utils';
 import { TenderlyNetwork } from '../constants';
-import { TenderlyCredentials, fetchCredentials } from './credentials-access';
+import { fetchCredentials, TenderlyCredentials } from './credentials-access';
 import { formatResponse, formatSimulationUrl } from './formatter';
 import { hex2int, requestSnapPrompt } from './utils';
 
@@ -18,6 +18,20 @@ export async function handleSendTenderlyTransaction(origin: string) {
     ]),
     '{ "data": "0x..." }',
   );
+}
+
+/**
+ * Fetches all networks supported by Tenderly.
+ */
+export async function fetchPublicTenderlyNetworks() {
+  const response = await fetch(
+    `https://api.tenderly.co/api/v1/public-networks`,
+    {
+      method: 'GET',
+    },
+  );
+
+  return await response.json();
 }
 
 /**
@@ -67,6 +81,7 @@ async function submitSimulation(
     throw new Error('Chain ID is not provided.');
   }
 
+  // Fetch public networks
   if (!TenderlyNetwork[networkId as number]) {
     throw new Error(
       `Chain ID ${chainId} (${networkId}) is not supported by Tenderly.`,

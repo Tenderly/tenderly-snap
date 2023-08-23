@@ -10,6 +10,7 @@ import {
 import BigNumber from 'bignumber.js';
 import { TenderlyCredentials } from './credentials-access';
 import { formatAmount, formatUsdValue } from './utils';
+import { TransactionAssetChangesResponseData } from './types';
 
 /**
  * This function receives the raw data and credentials of a Tenderly project simulation,
@@ -45,29 +46,34 @@ export function formatResponse(
  */
 function formatAssetChanges(from: string, data: any): Component[] {
   const panelOutputs: Component[] = [heading('Asset Changes:')];
-  const assetChanges = data.transaction.transaction_info?.asset_changes;
+  const assetChanges: TransactionAssetChangesResponseData[] =
+    data.transaction.transaction_info?.asset_changes;
 
   if (!assetChanges) {
     panelOutputs.push(text('No asset changes'));
     return panelOutputs;
   }
 
-  const assetsInList =
-    assetChanges.filter((asset: any) => asset.to === from) || [];
-  const assetsOutList =
-    assetChanges.filter((asset: any) => asset.from === from) || [];
+  const assetsInList: TransactionAssetChangesResponseData[] =
+    assetChanges.filter(
+      (asset: TransactionAssetChangesResponseData) => asset.to === from,
+    ) || [];
+  const assetsOutList: TransactionAssetChangesResponseData[] =
+    assetChanges.filter(
+      (asset: TransactionAssetChangesResponseData) => asset.from === from,
+    ) || [];
 
   const assetsInOutputs: Component[] = [text('✅ **Assets In**')];
   const assetsOutOutputs: Component[] = [text('⚠️ **Assets Out**')];
 
   // Assets In
-  assetsInList.forEach((token: any) => {
-    const isNFT = token.token_info.standard === 'ERC721';
-    const symbolName = token.token_info?.symbol?.toUpperCase() || 'N/A';
+  assetsInList.forEach((token: TransactionAssetChangesResponseData) => {
+    const isNFT: boolean = token.token_info.standard === 'ERC721';
+    const symbolName: string = token.token_info?.symbol?.toUpperCase() || 'N/A';
     const symbol = isNFT ? '🖼' : '🪙';
-    const tokenId = token.token_id ? ` #${Number(token.token_id)}` : '';
-    const tokenName = token.token_info?.name || 'N/A';
-    const tokenAmount = token.amount || '1';
+    const tokenId: string = token.token_id ? ` #${Number(token.token_id)}` : '';
+    const tokenName: string = token.token_info?.name || 'N/A';
+    const tokenAmount: string = token.amount || '1';
 
     // Show a token symbol and ID
     assetsInOutputs.push(text(`${symbol} **${symbolName}${tokenId}**`));
@@ -88,13 +94,13 @@ function formatAssetChanges(from: string, data: any): Component[] {
   });
 
   // Assets Out
-  assetsOutList.forEach((token: any) => {
-    const isNFT = token.token_info.standard === 'ERC721';
-    const symbolName = token.token_info?.symbol?.toUpperCase() || 'N/A';
+  assetsOutList.forEach((token: TransactionAssetChangesResponseData) => {
+    const isNFT: boolean = token.token_info.standard === 'ERC721';
+    const symbolName: string = token.token_info?.symbol?.toUpperCase() || 'N/A';
     const symbol = isNFT ? '🖼' : '🪙';
-    const tokenId = token.token_id ? ` #${Number(token.token_id)}` : '';
-    const tokenName = token.token_info?.name || 'N/A';
-    const tokenAmount = token.amount || '1';
+    const tokenId: string = token.token_id ? ` #${Number(token.token_id)}` : '';
+    const tokenName: string = token.token_info?.name || 'N/A';
+    const tokenAmount: string = token.amount || '1';
 
     // Show a token symbol and ID
     assetsOutOutputs.push(text(`${symbol} **${symbolName}${tokenId}**`));

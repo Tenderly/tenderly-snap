@@ -1,78 +1,123 @@
-# @metamask/template-snap-monorepo
+<div>
+  <img width="1680" alt="Tenderly Snap" src="https://github.com/Tenderly/tenderly-metamask-snap-simulate-asset-changes/assets/26412515/7b2f0a8d-8b3e-43bd-be50-1e7ddb4a0a0f">
+  <h1 align="center">Tenderly Snap</h1>
+</div>
 
-This repository demonstrates how to develop a snap with TypeScript. For detailed instructions, see [the MetaMask documentation](https://docs.metamask.io/guide/snaps.html#serving-a-snap-to-your-local-environment).
+<p align="center">
+  Tenderly Snap presents opportunities for wallets, DeFi projects, and DEXs to make transactions more human-readable for their users.
+</p>
 
-MetaMask Snaps is a system that allows anyone to safely expand the capabilities of MetaMask. A _snap_ is a program that we run in an isolated environment that can customize the wallet experience.
+<p align="center">
+  <a href="https://twitter.com/TenderlyApp">
+    <img src="https://img.shields.io/twitter/follow/TenderlyApp?style=flat&label=%40TenderlyApp&logo=twitter&color=0bf&logoColor=fff" alt="Twitter" />
+  </a>
+  <a href="https://github.com/Tenderly/tenderly-snap/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Tenderly/tenderly-snap?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
+  </a>
+</p>
 
-## Snaps is pre-release software
+<p align="center">
+  <a href="#introduction"><strong>Introduction</strong></a> ·
+  <a href="#setup"><strong>Setup</strong></a> ·
+  <a href="#contributing"><strong>Contributing</strong></a>
+</p>
+<br/>
 
-To interact with (your) Snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
+# Introduction
 
-## Getting Started
+The Tenderly Snap is an innovative collaboration that merges the robust simulation capabilities of Tenderly with the extensive features of MetaMask Snaps. Our main objective is to augment the transparency and visibility of dApp contract calls, giving users a comprehensive overview before they confirm a transaction.
 
-Clone the template-snap repository [using this template](https://github.com/MetaMask/template-snap-monorepo/generate) and setup the development environment:
+Upon setting up a transaction, the user is presented with the following data points to assist in making an informed decision:
 
-```shell
-yarn install && yarn start
+| Feature | Description |
+|---------|-------------|
+| **Link to Simulation in Tenderly Dashboard** | For a more in-depth analysis, users can follow a link to view the full contract simulation on the Tenderly Dashboard. |
+| **Link to Publicly Shared Simulation in Tenderly Dashboard** | The shared resources are in read-only mode. The receiver of the URL does not need to have a Tenderly account to view the resources. |
+| **Asset Changes with Dollar Value** | To assist in understanding the financial implications of the transaction, users are shown any changes in asset quantities along with their corresponding dollar value. The most commonly used token standards are supported: **ERC20** and **ERC721**. |
+
+By providing these features, our project aims to enhance the user experience, reduce transaction risks, and increase the understanding of blockchain transactions.
+
+# Setup
+
+Welcome to the setup guide for the Tenderly Snap. In this tutorial, we will guide you through each step to ensure that you are set up correctly. Follow the instructions below to get started.
+
+## 1. MetaMask Snap Development
+
+### Disable the Production Version of MetaMask
+
+If you have the production version of MetaMask installed, you'll need to disable it. Navigate to `chrome://extensions` in your browser. Locate MetaMask from the list of your installed extensions, and toggle it off. Alternatively, you can start a new profile in Chrome or Brave, which will allow you to use different extensions for different purposes.
+
+### Install MetaMask Flask Development Plugin
+
+The next step is to install the MetaMask Flask development plugin. This is a specific version of MetaMask designed for development purposes. You can install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/metamask-flask-developmen/ljfoeinjpaedjfecbmggjgodbgkmjkjk). Simply click the link and follow the instructions to add the plugin to your browser.
+
+## 2. Tenderly Access
+
+### Open a Tenderly Account
+
+To use the Tenderly MetaMask snap, you'll need a Tenderly account. If you don't have one already, visit the [Tenderly website](https://dashboard.tenderly.co/register) and create a new account.
+
+### Create an Access Token
+
+Once you've logged into your Tenderly account, you will need to create an `access token`. This is a unique identifier that allows the Tenderly MetaMask snap to interact with your Tenderly account. You can generate it on the following link https://dashboard.tenderly.co/account/authorization.
+
+<img width="577" alt="image" src="https://github.com/Tenderly/tenderly-metamask-snap-simulate-asset-changes/assets/26412515/0abb39b3-dd2b-4af6-98c4-73c00f4f70f0">
+
+## 3. App Setup
+
+### Clone the Repository
+
+Now, you'll need to get the code for the app onto your local machine. You can do this by cloning this repository. If you're not sure how to do this, you can find detailed instructions in the GitHub documentation.
+
+### Start the App
+
+After you've cloned the repository, navigate to the root directory of the project in your terminal. Once you're in the correct location, run the command `yarn start`. This will start the app, and it should be accessible on http://localhost:8000.
+
+To clone the repository, use the following command:
+
+```
+git clone https://github.com/Tenderly/tenderly-snap.git
 ```
 
-## Cloning
+Then navigate to the root directory of the project:
 
-This repository contains GitHub Actions that you may find useful, see `.github/workflows` and [Releasing & Publishing](https://github.com/MetaMask/template-snap-monorepo/edit/main/README.md#releasing--publishing) below for more information.
+```
+cd tenderly-snap
+```
 
-If you clone or create this repository outside the MetaMask GitHub organization, you probably want to run `./scripts/cleanup.sh` to remove some files that will not work properly outside the MetaMask GitHub organization.
+Start the app with:
 
-Note that the `action-publish-release.yml` workflow contains a step that publishes the frontend of this snap (contained in the `public/` directory) to GitHub pages. If you do not want to publish the frontend to GitHub pages, simply remove the step named "Publish to GitHub Pages" in that workflow.
+```
+yarn start
+```
 
-If you don't wish to use any of the existing GitHub actions in this repository, simply delete the `.github/workflows` directory.
+## 4. Connection & Credentials
 
-## Contributing
+### Install the Snap
 
-### Testing and Linting
+With the app running, you can now install the Tenderly MetaMask snap. To do this, click on **Reconnect** button within the app.
 
-Run `yarn test` to run the tests once.
+### Add Tenderly Credentials
 
-Run `yarn lint` to run the linter, or run `yarn lint:fix` to run the linter and fix any automatically fixable issues.
+Finally, you'll need to add your Tenderly credentials to the snap. Click on **Add access token** button within the app. You'll need to enter your credentials in the following format: `{account_id}@{project_id}@{access_token}`.
 
-### Releasing & Publishing
+That's it! You've successfully set up the Tenderly MetaMask snap. If you encounter any issues during the setup process, don't hesitate to reach out to our support team at support@tenderly.co. We're here to help! 💜
 
-The project follows the same release process as the other libraries in the MetaMask organization. The GitHub Actions [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) and [`action-publish-release`](https://github.com/MetaMask/action-publish-release) are used to automate the release process; see those repositories for more information about how they work.
+# Contributing
 
-1. Choose a release version.
+We love our contributors! Here's how you can contribute:
 
-- The release version should be chosen according to SemVer. Analyze the changes to see whether they include any breaking changes, new features, or deprecations, then choose the appropriate SemVer version. See [the SemVer specification](https://semver.org/) for more information.
+- [Open an issue](https://github.com/Tenderly/tenderly-snap/issues) if you believe you've encountered a bug.
+- Make a [pull request](https://github.com/Tenderly/tenderly-snap/pull) to add new features/make quality-of-life improvements/fix bugs.
 
-2. If this release is backporting changes onto a previous release, then ensure there is a major version branch for that version (e.g. `1.x` for a `v1` backport release).
+<a href="https://github.com/Tenderly/tenderly-snap/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Tenderly/tenderly-snap" alt="tenderly-contributors" />
+</a>
 
-- The major version branch should be set to the most recent release with that major version. For example, when backporting a `v1.0.2` release, you'd want to ensure there was a `1.x` branch that was set to the `v1.0.1` tag.
+# Author
 
-3. Trigger the [`workflow_dispatch`](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch) event [manually](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow) for the `Create Release Pull Request` action to create the release PR.
+- Vanja Paunović ([@dzimiks](https://twitter.com/dzimiks))
 
-- For a backport release, the base branch should be the major version branch that you ensured existed in step 2. For a normal release, the base branch should be the main branch for that repository (which should be the default value).
-- This should trigger the [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) workflow to create the release PR.
+<br/>
 
-4. Update the changelog to move each change entry into the appropriate change category ([See here](https://keepachangelog.com/en/1.0.0/#types) for the full list of change categories, and the correct ordering), and edit them to be more easily understood by users of the package.
-
-- Generally any changes that don't affect consumers of the package (e.g. lockfile changes or development environment changes) are omitted. Exceptions may be made for changes that might be of interest despite not having an effect upon the published package (e.g. major test improvements, security improvements, improved documentation, etc.).
-- Try to explain each change in terms that users of the package would understand (e.g. avoid referencing internal variables/concepts).
-- Consolidate related changes into one change entry if it makes it easier to explain.
-- Run `yarn auto-changelog validate --rc` to check that the changelog is correctly formatted.
-
-5. Review and QA the release.
-
-- If changes are made to the base branch, the release branch will need to be updated with these changes and review/QA will need to restart again. As such, it's probably best to avoid merging other PRs into the base branch while review is underway.
-
-6. Squash & Merge the release.
-
-- This should trigger the [`action-publish-release`](https://github.com/MetaMask/action-publish-release) workflow to tag the final release commit and publish the release on GitHub.
-
-7. Publish the release on npm.
-
-- Be very careful to use a clean local environment to publish the release, and follow exactly the same steps used during CI.
-- Use `npm publish --dry-run` to examine the release contents to ensure the correct files are included. Compare to previous releases if necessary (e.g. using `https://unpkg.com/browse/[package name]@[package version]/`).
-- Once you are confident the release contents are correct, publish the release using `npm publish`.
-
-## Notes
-
-- Babel is used for transpiling TypeScript to JavaScript, so when building with the CLI,
-  `transpilationMode` must be set to `localOnly` (default) or `localAndDeps`.
+The repo is made using [@metamask/template-snap-monorepo](https://github.com/MetaMask/template-snap-monorepo).
