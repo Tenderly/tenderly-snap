@@ -49,23 +49,11 @@ export const formatNumber = (
     if (n.gte(1e9)) {
       return `${n.div(1e9).toFormat(decimal, format)}B`;
     }
+
     return n.decimalPlaces(0).toFormat(format);
   }
+
   return n.toFormat(decimal, format);
-};
-
-export const formatPrice = (price: number) => {
-  if (price >= 1) {
-    return formatNumber(price);
-  }
-
-  if (price < 0.00001) {
-    if (price.toString().length > 10) {
-      return Number(price).toExponential(4);
-    }
-    return price.toString();
-  }
-  return formatNumber(price, 4);
 };
 
 export const formatUsdValue = (value: string) => {
@@ -82,26 +70,28 @@ export const formatUsdValue = (value: string) => {
   return '<$0.01';
 };
 
-export const formatAmount = (amount: number, decimals = 4) => {
-  if (amount > 1e9) {
-    return `${new BigNumber(amount).div(1e9).toFormat(4)}B`;
+export const formatAmount = (amount: string, decimals = 4) => {
+  const bnValue = new BigNumber(amount);
+
+  if (bnValue.gt(1e9)) {
+    return `${bnValue.div(1e9).toFormat(4)}B`;
   }
 
-  if (amount > 10000) {
-    return formatNumber(amount);
+  if (bnValue.gt(10000)) {
+    return formatNumber(bnValue.toString());
   }
 
-  if (amount > 1) {
-    return formatNumber(amount, 4);
+  if (bnValue.gt(1)) {
+    return formatNumber(bnValue.toString(), 4);
   }
 
-  if (amount < 0.00001) {
-    if (amount.toString().length > 10) {
-      return Number(amount).toExponential(4);
+  if (bnValue.lt(0.00001)) {
+    if (bnValue.toString().length > 10) {
+      return Number(bnValue.toString()).toExponential(4);
     }
 
-    return amount.toString();
+    return bnValue.toString();
   }
 
-  return formatNumber(amount, decimals);
+  return formatNumber(bnValue.toString(), decimals);
 };

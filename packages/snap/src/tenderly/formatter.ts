@@ -63,26 +63,24 @@ function formatAssetChanges(from: string, data: any): Component[] {
   // Assets In
   assetsInList.forEach((token: any) => {
     const isNFT = token.token_info.standard === 'ERC721';
+    const symbolName = token.token_info?.symbol?.toUpperCase() || 'N/A';
     const symbol = isNFT ? '🖼' : '🪙';
+    const tokenId = token.token_id ? ` #${Number(token.token_id)}` : '';
+    const tokenName = token.token_info?.name || 'N/A';
+    const tokenAmount = token.amount || '1';
 
-    // Show a token symbol and ID (if any)
-    assetsInOutputs.push(
-      text(
-        `${symbol} **${token.token_info.symbol.toUpperCase()}${
-          token.token_id ? ` #${Number(token.token_id)}` : ''
-        }**`,
-      ),
-    );
+    // Show a token symbol and ID
+    assetsInOutputs.push(text(`${symbol} **${symbolName}${tokenId}**`));
 
     // Show a token name
     assetsInOutputs.push(
-      text(`${isNFT ? 'Collection:' : 'Name:'} ${token.token_info.name}`),
+      text(`${isNFT ? 'Collection:' : 'Name:'} ${tokenName}`),
     );
 
     // Show a token amount & dollar value
     assetsInOutputs.push(
       text(
-        `${token.type}: + ${formatAmount(token.amount)} (≈ ${formatUsdValue(
+        `${token.type}: + ${formatAmount(tokenAmount)} (≈ ${formatUsdValue(
           new BigNumber(token.dollar_value).toFixed(),
         )})`,
       ),
@@ -92,26 +90,24 @@ function formatAssetChanges(from: string, data: any): Component[] {
   // Assets Out
   assetsOutList.forEach((token: any) => {
     const isNFT = token.token_info.standard === 'ERC721';
+    const symbolName = token.token_info?.symbol?.toUpperCase() || 'N/A';
     const symbol = isNFT ? '🖼' : '🪙';
+    const tokenId = token.token_id ? ` #${Number(token.token_id)}` : '';
+    const tokenName = token.token_info?.name || 'N/A';
+    const tokenAmount = token.amount || '1';
 
-    // Show a token symbol and ID (if any)
-    assetsOutOutputs.push(
-      text(
-        `${symbol} **${token.token_info.symbol.toUpperCase()}${
-          token.token_id ? ` #${Number(token.token_id)}` : ''
-        }**`,
-      ),
-    );
+    // Show a token symbol and ID
+    assetsOutOutputs.push(text(`${symbol} **${symbolName}${tokenId}**`));
 
     // Show a token name
     assetsOutOutputs.push(
-      text(`${isNFT ? 'Collection:' : 'Name:'} ${token.token_info.name}`),
+      text(`${isNFT ? 'Collection:' : 'Name:'} ${tokenName}`),
     );
 
     // Show a token amount & dollar value
     assetsOutOutputs.push(
       text(
-        `${token.type}: - ${formatAmount(token.amount)} (≈ ${formatUsdValue(
+        `${token.type}: - ${formatAmount(tokenAmount)} (≈ ${formatUsdValue(
           new BigNumber(token.dollar_value).toFixed(),
         )})`,
       ),
