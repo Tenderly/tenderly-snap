@@ -126,6 +126,13 @@ export const sendTransaction = async (data: any): Promise<any> => {
   }
 };
 
+/**
+ * Sends a predefined failed transaction using the Ethereum provider's `eth_sendTransaction` JSON-RPC method.
+ *
+ * @returns A Promise that resolves to the transaction hash if the transaction
+ * submission was successful, or rejects with an error if something went wrong.
+ * @throws Will throw an error if no accounts are available or if the Ethereum provider's request fails.
+ */
 export const sendFailedTransaction = async (): Promise<any> => {
   try {
     const [from] = (await window.ethereum.request({

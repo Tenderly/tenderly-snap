@@ -2,8 +2,6 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { MetamaskActions, MetaMaskContext } from '../hooks';
 import {
-  connectSnap,
-  getSnap,
   updateTenderlyAccessKey,
   sendTransaction,
   sendTenderlyTransaction,
@@ -128,21 +126,6 @@ const successfulTxPayload = {
 
 const Index = () => {
   const [state, dispatch] = useContext(MetaMaskContext);
-
-  const handleConnectClick = async () => {
-    try {
-      await connectSnap();
-      const installedSnap = await getSnap();
-
-      dispatch({
-        type: MetamaskActions.SetInstalled,
-        payload: installedSnap,
-      });
-    } catch (e) {
-      console.error(e);
-      dispatch({ type: MetamaskActions.SetError, payload: e });
-    }
-  };
 
   const handleSendTxClick = async () => {
     try {
