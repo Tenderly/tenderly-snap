@@ -1,6 +1,6 @@
 import { divider, heading, panel, Panel, text } from '@metamask/snaps-ui';
 import { Json } from '@metamask/utils';
-import { TenderlyNetwork } from '../constants';
+import { TenderlyApi } from '../constants';
 import { fetchCredentials, TenderlyCredentials } from './credentials-access';
 import { formatResponse, formatSimulationUrl } from './formatter';
 import { hex2int, requestSnapPrompt } from './utils';
@@ -24,12 +24,9 @@ export async function handleSendTenderlyTransaction(origin: string) {
  * Fetches all networks supported by Tenderly.
  */
 export async function fetchPublicTenderlyNetworks() {
-  const response = await fetch(
-    `https://api.tenderly.co/api/v1/public-networks`,
-    {
-      method: 'GET',
-    },
-  );
+  const response = await fetch(`${TenderlyApi}/v1/public-networks`, {
+    method: 'GET',
+  });
 
   return await response.json();
 }
@@ -53,10 +50,43 @@ export async function simulate(
     return panel([text('🚨 Tenderly access token updated. Please try again.')]);
   }
 
+  // Get chain id
+  const chainId = await ethereum.request({ method: 'eth_chainId' });
+  const networkId = hex2int(chainId as string);
+
+  if (!chainId) {
+    throw new Error('Chain ID is not provided.');
+  }
+
+  // Fetch Tenderly-supported networks
+  const tenderlyNetworks = await fetchPublicTenderlyNetworks();
+
+  if (!tenderlyNetworks) {
+    throw new Error('No Tenderly-supported networks are provided.');
+  }
+
+  const networkIds: number[] = tenderlyNetworks.map((network: any) =>
+    Number(network.id),
+  );
+
+  // Check if the network is supported by Tenderly
+  if (!networkIds.includes(networkId as number)) {
+    throw new Error(
+      `Chain ID ${chainId} (${networkId}) is not supported by Tenderly.`,
+    );
+  }
+
+  // Simulate a transaction
   const [from] = (await ethereum.request({
     method: 'eth_requestAccounts',
   })) as string[];
-  const simulationResponse = await submitSimulation(transaction, credentials);
+
+  const simulationResponse = await submitSimulation(
+    transactionOrigin,
+    transaction,
+    credentials,
+    networkId,
+  );
   const err = catchError(simulationResponse, credentials);
 
   return err || formatResponse(from, simulationResponse, credentials);
@@ -67,29 +97,19 @@ export async function simulate(
  * It prepares the transaction data, sends it to the API, and if the simulation is successful,
  * it makes the simulation publicly accessible.
  *
+ * @param transactionOrigin - The origin of the transaction.
  * @param transaction - The transaction to simulate.
  * @param credentials - Tenderly credentials object.
+ * @param networkId - Tenderly network id.
  */
 async function submitSimulation(
+  transactionOrigin: string,
   transaction: { [key: string]: Json },
   credentials: TenderlyCredentials,
+  networkId: number | null,
 ) {
-  const chainId = await ethereum.request({ method: 'eth_chainId' });
-  const networkId = hex2int(chainId as string);
-
-  if (!chainId) {
-    throw new Error('Chain ID is not provided.');
-  }
-
-  // Fetch public networks
-  if (!TenderlyNetwork[networkId as number]) {
-    throw new Error(
-      `Chain ID ${chainId} (${networkId}) is not supported by Tenderly.`,
-    );
-  }
-
   const response = await fetch(
-    `https://api.tenderly.co/api/v1/account/${credentials.accountId}/project/${credentials.projectId}/simulate`,
+    `${TenderlyApi}/v1/account/${credentials.accountId}/project/${credentials.projectId}/simulate`,
     {
       method: 'POST',
       body: JSON.stringify({
@@ -103,7 +123,7 @@ async function submitSimulation(
         save: true,
         save_if_fails: true,
         simulation_type: 'full',
-        source: 'tenderly-snap',
+        source: `Tenderly Snap: ${transactionOrigin}`,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -117,7 +137,7 @@ async function submitSimulation(
   // Make the simulation publicly accessible
   if (parsedResponse?.simulation?.id) {
     await fetch(
-      `https://api.tenderly.co/api/v1/account/${credentials.accountId}/project/${credentials.projectId}/simulations/${parsedResponse.simulation.id}/share`,
+      `${TenderlyApi}/v1/account/${credentials.accountId}/project/${credentials.projectId}/simulations/${parsedResponse.simulation.id}/share`,
       {
         method: 'POST',
         headers: {
