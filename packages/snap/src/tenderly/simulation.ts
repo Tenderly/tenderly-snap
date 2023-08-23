@@ -1,5 +1,6 @@
 import { panel, text, Panel, divider, heading } from '@metamask/snaps-ui';
 import { Json } from '@metamask/utils';
+import { TenderlyNetwork } from '../constants';
 import { TenderlyCredentials, fetchCredentials } from './credentials-access';
 import { formatResponse, formatSimulationUrl } from './formatter';
 import { hex2int, requestSnapPrompt } from './utils';
@@ -60,6 +61,18 @@ async function submitSimulation(
   credentials: TenderlyCredentials,
 ) {
   const chainId = await ethereum.request({ method: 'eth_chainId' });
+  const networkId = hex2int(chainId as string);
+
+  if (!chainId) {
+    throw new Error('Chain ID is not provided.');
+  }
+
+  if (!TenderlyNetwork[networkId as number]) {
+    throw new Error(
+      `Chain ID ${chainId} (${networkId}) is not supported by Tenderly.`,
+    );
+  }
+
   const response = await fetch(
     `https://api.tenderly.co/api/v1/account/${credentials.accountId}/project/${credentials.projectId}/simulate`,
     {
@@ -71,7 +84,7 @@ async function submitSimulation(
         gas: hex2int(transaction.gas),
         gas_price: hex2int(transaction.maxFeePerGas),
         value: hex2int(transaction.value),
-        network_id: hex2int(chainId as string),
+        network_id: networkId,
         save: true,
         save_if_fails: true,
         simulation_type: 'full',
