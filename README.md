@@ -1,5 +1,5 @@
 <div>
-  <img width="1680" alt="Tenderly Snap" src="https://github.com/Tenderly/tenderly-metamask-snap-simulate-asset-changes/assets/26412515/7b2f0a8d-8b3e-43bd-be50-1e7ddb4a0a0f">
+  <img width="1680" alt="Tenderly Snap" src="https://github.com/Tenderly/tenderly-snap/assets/26412515/88faa440-d7b5-41e2-98de-a7fcdc4d029f">
   <h1 align="center">Tenderly Snap</h1>
 </div>
 
