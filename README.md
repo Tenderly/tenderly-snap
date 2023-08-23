@@ -29,10 +29,10 @@ Tenderly TX Preview enables you to see the exact outcomes of your transactions b
 
 By previewing transactions before sending, you can avoid unnecessary gas costs, prevent failed transactions, and identify potential security risks. With Tenderly TX Preview, you can make an informed decision thanks to the following information:
 
-| Feature | Description |
-|---------|-------------|
-| **Asset Changes with Dollar Values** | See the exact asset transfers within your ERC-20 and ERC-721 transactions, including their corresponding dollar values. |
-| **Link to Simulation in Tenderly Dashboard** | Get detailed information about your transaction simulations in the Tenderly Dashboard. |
+| Feature                                                      | Description                                                                                                                                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Asset Changes with Dollar Values**                         | See the exact asset transfers within your ERC-20 and ERC-721 transactions, including their corresponding dollar values.                                                   |
+| **Link to Simulation in Tenderly Dashboard**                 | Get detailed information about your transaction simulations in the Tenderly Dashboard.                                                                                    |
 | **Link to Publicly Shared Simulation in Tenderly Dashboard** | Share your simulated transactions with others using a public URL. The recipient doesn’t need to have a Tenderly account to view the shared transaction in read-only mode. |
 
 With this in-depth information about your transactions, you can understand their exact financial implications, avoid any hidden security risks, and save valuable resources.
