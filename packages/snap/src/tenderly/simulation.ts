@@ -177,10 +177,15 @@ function catchError(data: any, credentials: TenderlyCredentials): Panel | null {
       text(JSON.stringify(data)),
     ]);
   } else if (data.transaction.error_info) {
+    const callTrace = data.transaction.transaction_info?.call_trace;
+    const call = callTrace?.calls ? callTrace.calls?.[0] : null;
+    const errorMessage = call?.error || null;
+
     return panel([
       heading(`❌ Error in ${data.transaction.error_info.address}:`),
       divider(),
       text(data.transaction.error_info.error_message),
+      ...(errorMessage ? [text(`Error Message: ${errorMessage}`)] : []),
       divider(),
       ...formatSimulationUrl(data, credentials),
     ]);

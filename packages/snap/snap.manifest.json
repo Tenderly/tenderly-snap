@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
   "description": "A MetaMask Snap with transaction preview powered by Tenderly Simulation API.",
-  "proposedName": "Tenderly Snap",
+  "proposedName": "Tenderly Tx Preview",
   "repository": {
     "type": "git",
     "url": "https://github.com/tenderly/tenderly-snap.git"
   },
   "source": {
-    "shasum": "sO8kvz2+rImzZLAdPrxBemNAcZIB0muJ4vdrMvUieuU=",
+    "shasum": "eXMzSE4VCj+PHTnQSvvxjery5eo5n9cJjOcdAVwA0oo=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
