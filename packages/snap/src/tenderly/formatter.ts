@@ -7,23 +7,27 @@ import {
   Panel,
   text,
 } from '@metamask/snaps-ui';
+import BigNumber from 'bignumber.js';
 import { TenderlyCredentials } from './credentials-access';
+import { formatAmount, formatUsdValue } from './utils';
 
 /**
  * This function receives the raw data and credentials of a Tenderly project simulation,
  * calls the individual formatter functions for each relevant section
  * (like balance changes, output value, asset changes, etc.) and returns a panel with all the formatted outputs.
  *
+ * @param from - From account that's currently connected.
  * @param data - Simulation API data.
  * @param credentials - Tenderly credentials object.
  * @returns Panel with formatted values.
  */
 export function formatResponse(
+  from: string,
   data: any,
   credentials: TenderlyCredentials,
 ): Panel {
   const panelOutputs = [
-    ...formatAssetChanges(data),
+    ...formatAssetChanges(from, data),
     divider(),
     ...formatSimulationUrl(data, credentials),
   ];
@@ -35,10 +39,11 @@ export function formatResponse(
  * This function formats a panel to show any changes to assets, differentiating between ERC20, ERC721, and other changes.
  * If there are no changes, it informs the user.
  *
+ * @param from - From account that's currently connected.
  * @param data - Simulation API data.
  * @returns Panel outputs with asset changes.
  */
-function formatAssetChanges(data: any): Component[] {
+function formatAssetChanges(from: string, data: any): Component[] {
   const panelOutputs: Component[] = [heading('Asset Changes:')];
   const assetChanges = data.transaction.transaction_info?.asset_changes;
 
@@ -47,63 +52,80 @@ function formatAssetChanges(data: any): Component[] {
     return panelOutputs;
   }
 
-  const erc20Outputs: Component[] = [text('🪙 **ERC20 Changes:**')];
-  const erc721Outputs: Component[] = [text('🖼️ **ERC721 (NFT) Changes:**')];
-  const otherOutputs: Component[] = [text('**Other Changes:**')];
+  const assetsInList =
+    assetChanges.filter((asset: any) => asset.to === from) || [];
+  const assetsOutList =
+    assetChanges.filter((asset: any) => asset.from === from) || [];
 
-  assetChanges.forEach((assetChange: any) => {
-    if (assetChange.token_info.standard === 'ERC20') {
-      erc20Outputs.push(
-        text(
-          `**${
-            assetChange.token_info.name
-          } (${assetChange.token_info.symbol?.toUpperCase()})**`,
-        ),
-      );
-      erc20Outputs.push(text(`Change Type: ${assetChange.type}`));
-      erc20Outputs.push(
-        text(`Price: $${Number(assetChange.dollar_value).toFixed(4)}`),
-      );
-      erc20Outputs.push(text(`Amount: ${assetChange.amount}`));
-      erc20Outputs.push(divider());
-    } else if (assetChange.token_info.standard === 'ERC721') {
-      erc721Outputs.push(
-        text(
-          `**${
-            assetChange.token_info.name
-          } (${assetChange.token_info.symbol?.toUpperCase()})**`,
-        ),
-      );
-      erc721Outputs.push(text(`Change Type: ${assetChange.type}`));
-      erc721Outputs.push(
-        text(`Floor Price: $${Number(assetChange.dollar_value).toFixed(4)}`),
-      );
-      erc721Outputs.push(text(`Amount: ${assetChange.amount}`));
-      erc721Outputs.push(divider());
-    } else {
-      otherOutputs.push(
-        text(
-          `**${assetChange.token_info.name}** ($${Number(
-            assetChange.token_info.dollar_value,
-          ).toFixed(4)})`,
-        ),
-      );
-      otherOutputs.push(text(`Change Type: ${assetChange.type}`));
-      otherOutputs.push(
-        text(
-          `Amount: ${assetChange.amount} **($${Number(
-            assetChange.dollar_value,
-          ).toFixed(4)})**`,
-        ),
-      );
-      otherOutputs.push(divider());
-    }
+  const assetsInOutputs: Component[] = [text('✅ **Assets In**')];
+  const assetsOutOutputs: Component[] = [text('⚠️ **Assets Out**')];
+
+  // Assets In
+  assetsInList.forEach((token: any) => {
+    const isNFT = token.token_info.standard === 'ERC721';
+    const symbol = isNFT ? '🖼' : '🪙';
+
+    // Show a token symbol and ID (if any)
+    assetsInOutputs.push(
+      text(
+        `${symbol} **${token.token_info.symbol.toUpperCase()}${
+          token.token_id ? ` #${Number(token.token_id)}` : ''
+        }**`,
+      ),
+    );
+
+    // Show a token name
+    assetsInOutputs.push(
+      text(`${isNFT ? 'Collection:' : 'Name:'} ${token.token_info.name}`),
+    );
+
+    // Show a token amount & dollar value
+    assetsInOutputs.push(
+      text(
+        `${token.type}: + ${formatAmount(token.amount)} (≈ ${formatUsdValue(
+          new BigNumber(token.dollar_value).toFixed(),
+        )})`,
+      ),
+    );
   });
 
+  // Assets Out
+  assetsOutList.forEach((token: any) => {
+    const isNFT = token.token_info.standard === 'ERC721';
+    const symbol = isNFT ? '🖼' : '🪙';
+
+    // Show a token symbol and ID (if any)
+    assetsOutOutputs.push(
+      text(
+        `${symbol} **${token.token_info.symbol.toUpperCase()}${
+          token.token_id ? ` #${Number(token.token_id)}` : ''
+        }**`,
+      ),
+    );
+
+    // Show a token name
+    assetsOutOutputs.push(
+      text(`${isNFT ? 'Collection:' : 'Name:'} ${token.token_info.name}`),
+    );
+
+    // Show a token amount & dollar value
+    assetsOutOutputs.push(
+      text(
+        `${token.type}: - ${formatAmount(token.amount)} (≈ ${formatUsdValue(
+          new BigNumber(token.dollar_value).toFixed(),
+        )})`,
+      ),
+    );
+  });
+
+  // Add divider below assets out list if both lists has at least 1 member
+  if (assetsInOutputs.length > 1 && assetsOutOutputs.length > 1) {
+    assetsOutOutputs.push(divider());
+  }
+
   panelOutputs.push(
-    ...(erc20Outputs.length > 1 ? erc20Outputs : []),
-    ...(erc721Outputs.length > 1 ? erc721Outputs : []),
-    ...(otherOutputs.length > 1 ? otherOutputs : []),
+    ...(assetsOutOutputs.length > 1 ? assetsOutOutputs : []),
+    ...(assetsInOutputs.length > 1 ? assetsInOutputs : []),
   );
   return panelOutputs;
 }

@@ -38,10 +38,13 @@ export async function simulate(
     return panel([text('🚨 Tenderly access token updated. Please try again.')]);
   }
 
+  const [from] = (await ethereum.request({
+    method: 'eth_requestAccounts',
+  })) as string[];
   const simulationResponse = await submitSimulation(transaction, credentials);
   const err = catchError(simulationResponse, credentials);
 
-  return err || formatResponse(simulationResponse, credentials);
+  return err || formatResponse(from, simulationResponse, credentials);
 }
 
 /**
