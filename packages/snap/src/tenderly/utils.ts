@@ -6,12 +6,6 @@ export const hex2int = (hex: string | Json): number | null => {
   return hex ? parseInt(hex.toString(), 16) : null;
 };
 
-export const strReplaceAll = (o: string, s: string, r: string): string => {
-  return o.replace(new RegExp(s, 'gu'), r);
-};
-
-export const arrMakeUnique = (arr: any[]): any[] => [...new Set(arr)];
-
 export const requestSnapPrompt = async (
   content: Panel,
   placeholder: string,

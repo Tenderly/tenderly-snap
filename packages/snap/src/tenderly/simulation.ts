@@ -163,11 +163,21 @@ async function submitSimulation(
 function catchError(data: any, credentials: TenderlyCredentials): Panel | null {
   if (!data.transaction) {
     if (data.error) {
+      // Skip when error is "insufficient funds for gas * price + value"
+      const showNoteMessage =
+        data.error.slug !== 'invalid_transaction_simulation';
+
       return panel([
-        heading('❌ Transaction Error'),
-        text(`**${data.error.slug}**`),
-        divider(),
-        text(data.error.message),
+        heading('❌ Error'),
+        text(`**${data.error.message}**`),
+        ...(showNoteMessage
+          ? [
+              divider(),
+              text(
+                'Please, reconnect the snap. If the problem persists, contact Tenderly support at support@tenderly.co.',
+              ),
+            ]
+          : []),
       ]);
     }
 

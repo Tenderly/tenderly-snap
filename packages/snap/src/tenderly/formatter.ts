@@ -45,7 +45,7 @@ export function formatResponse(
  * @returns Panel outputs with asset changes.
  */
 function formatAssetChanges(from: string, data: any): Component[] {
-  const panelOutputs: Component[] = [heading('Asset Changes:')];
+  const panelOutputs: Component[] = [heading('Asset Changes')];
   const assetChanges: TransactionAssetChangesResponseData[] =
     data.transaction.transaction_info?.asset_changes;
 
@@ -147,7 +147,7 @@ export function formatSimulationUrl(
   const sharedSimulationUrl = `https://dashboard.tenderly.co/shared/simulation/${data.simulation?.id}`;
 
   return [
-    heading('Tenderly Dashboard:'),
+    heading('Tenderly Dashboard'),
     text('See full simulation details in Tenderly.'),
     text(
       `**Status:** ${data.transaction?.status ? 'Success ✅' : 'Failed ❌'}`,
