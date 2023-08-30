@@ -18,6 +18,8 @@
   ],
   "scripts": {
     "build": "yarn workspaces foreach --parallel --topological --verbose run build",
+    "build:site": "yarn workspace @tenderly/metamask-snap-site run build",
+    "build:snap": "yarn workspace @tenderly/metamask-snap run build",
     "install-chrome": "./scripts/install-chrome.sh",
     "lint": "yarn lint:eslint && yarn lint:misc --check",
     "lint:eslint": "eslint . --cache --ext js,ts",
