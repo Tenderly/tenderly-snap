@@ -170,8 +170,9 @@ const Index = () => {
         Welcome to <Span>Tenderly Snap</Span>
       </Heading>
       <Subtitle>
-        Asset changes present opportunities for wallets, DeFi projects, and DEXs
-        to make transactions more human-readable for their users.
+        Tenderly TX Preview allows you to see the exact transaction outcomes
+        before sending them on-chain using the Tenderly Simulation
+        Infrastructure.
       </Subtitle>
       {state.error && (
         <ErrorMessage>
