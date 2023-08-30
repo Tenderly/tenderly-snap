@@ -11,4 +11,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add Tenderly Snap implementation
 
 [Unreleased]: https://github.com/Tenderly/tenderly-snap/compare/@tenderly/metamask-snap@0.1.2...HEAD
-[0.1.2]: https://github.com/Tenderly/tenderly-snap/releases/tag/@tenderly/metamask-snap-site@0.1.2
+[0.1.2]: https://github.com/Tenderly/tenderly-snap/releases/tag/@tenderly/metamask-snap@0.1.2
