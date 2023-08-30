@@ -1,6 +1,6 @@
 {
   "name": "@tenderly/metamask-snap",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A MetaMask Snap with transaction preview powered by Tenderly Simulation API.",
   "repository": {
     "type": "git",
