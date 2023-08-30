@@ -19,13 +19,12 @@
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
   <a href="#setup"><strong>Setup</strong></a> ·
-  <a href="#contributing"><strong>Contributing</strong></a>
 </p>
 <br/>
 
 # Introduction
 
-Tenderly TX Preview enables you to see the exact outcomes of your transactions before sending them on-chain. Powered by the Tenderly Simulation Infrastructure, this feature gives you detailed and human-readable information about your transactions, including transferred assets with exact dollar values for ERC-20 tokens and NFTs.
+Tenderly [TX Preview](https://docs.tenderly.co/simulations-and-forks/transaction-preview) enables you to see the exact outcomes of your transactions before sending them on-chain. Powered by the Tenderly Simulation Infrastructure, this feature gives you detailed and human-readable information about your transactions, including transferred assets with exact dollar values for ERC-20 tokens and NFTs.
 
 By previewing transactions before sending, you can avoid unnecessary gas costs, prevent failed transactions, and identify potential security risks. With Tenderly TX Preview, you can make an informed decision thanks to the following information:
 
