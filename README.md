@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="#introduction"><strong>Introduction</strong></a> ·
-  <a href="#setup"><strong>Setup</strong></a> ·
+  <a href="#setup"><strong>Setup</strong></a>
 </p>
 <br/>
 
