@@ -1,11 +1,11 @@
 {
-  "name": "snap",
+  "name": "@tenderly/metamask-snap",
   "version": "0.1.0",
   "private": true,
-  "description": "The 'Hello, world!' of MetaMask Snaps, now written in TypeScript.",
+  "description": "A MetaMask Snap with transaction preview powered by Tenderly Simulation API.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MetaMask/template-snap-monorepo.git"
+    "url": "https://github.com/tenderly/tenderly-snap.git"
   },
   "license": "(MIT-0 OR Apache-2.0)",
   "main": "src/index.ts",
@@ -29,6 +29,8 @@
   "dependencies": {
     "@metamask/snaps-types": "^0.32.2",
     "@metamask/snaps-ui": "^0.32.2",
+    "@metamask/utils": "^7.1.0",
+    "bignumber.js": "^9.1.1",
     "buffer": "^6.0.3"
   },
   "devDependencies": {

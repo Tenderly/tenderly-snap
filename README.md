@@ -1,78 +1,94 @@
-# @metamask/template-snap-monorepo
+<div>
+  <img width="1680" alt="Tenderly Snap" src="https://github.com/Tenderly/tenderly-snap/assets/26412515/88faa440-d7b5-41e2-98de-a7fcdc4d029f">
+  <h1 align="center">Tenderly Snap</h1>
+</div>
 
-This repository demonstrates how to develop a snap with TypeScript. For detailed instructions, see [the MetaMask documentation](https://docs.metamask.io/guide/snaps.html#serving-a-snap-to-your-local-environment).
+<p align="center">
+  Tenderly TX Preview allows you to see the exact transaction outcomes before sending them on-chain using the Tenderly Simulation Infrastructure.
+</p>
 
-MetaMask Snaps is a system that allows anyone to safely expand the capabilities of MetaMask. A _snap_ is a program that we run in an isolated environment that can customize the wallet experience.
+<p align="center">
+  <a href="https://twitter.com/TenderlyApp">
+    <img src="https://img.shields.io/twitter/follow/TenderlyApp?style=flat&label=%40TenderlyApp&logo=twitter&color=0bf&logoColor=fff" alt="Twitter" />
+  </a>
+  <a href="https://github.com/Tenderly/tenderly-snap/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/Tenderly/tenderly-snap?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
+  </a>
+</p>
 
-## Snaps is pre-release software
+<p align="center">
+  <a href="#introduction"><strong>Introduction</strong></a> ·
+  <a href="#setup"><strong>Setup</strong></a> ·
+  <a href="#contributing"><strong>Contributing</strong></a>
+</p>
+<br/>
 
-To interact with (your) Snaps, you will need to install [MetaMask Flask](https://metamask.io/flask/), a canary distribution for developers that provides access to upcoming features.
+# Introduction
 
-## Getting Started
+Tenderly TX Preview enables you to see the exact outcomes of your transactions before sending them on-chain. Powered by the Tenderly Simulation Infrastructure, this feature gives you detailed and human-readable information about your transactions, including transferred assets with exact dollar values for ERC-20 tokens and NFTs.
 
-Clone the template-snap repository [using this template](https://github.com/MetaMask/template-snap-monorepo/generate) and setup the development environment:
+By previewing transactions before sending, you can avoid unnecessary gas costs, prevent failed transactions, and identify potential security risks. With Tenderly TX Preview, you can make an informed decision thanks to the following information:
 
-```shell
+| Feature                                                      | Description                                                                                                                                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Asset Changes with Dollar Values**                         | See the exact asset transfers within your ERC-20 and ERC-721 transactions, including their corresponding dollar values.                                                   |
+| **Link to Simulation in Tenderly Dashboard**                 | Get detailed information about your transaction simulations in the Tenderly Dashboard.                                                                                    |
+| **Link to Publicly Shared Simulation in Tenderly Dashboard** | Share your simulated transactions with others using a public URL. The recipient doesn’t need to have a Tenderly account to view the shared transaction in read-only mode. |
+
+With this in-depth information about your transactions, you can understand their exact financial implications, avoid any hidden security risks, and save valuable resources.
+
+# Setup
+
+To start using Tenderly TX Preview, you can set it up using the Tenderly Dashboard or run it locally. Follow a few simple steps to get started.
+
+## 1. Get Tenderly access
+
+First, you need a Tenderly account to start using the TX Preview feature. To set up your account, [register by following a few simple steps](https://dashboard.tenderly.co/register).
+
+### Install Tenderly Snap from the Dashboard
+
+Next, generate a Tenderly access token to allow Tenderly Snap to connect to your Tenderly account. This is a unique identifier that you can on the following link https://dashboard.tenderly.co/account/authorization.
+
+By clicking the **Connect to Tenderly Snap** button, you’ll automatically install Tenderly Snap and be able to use Tenderly TX Preview.
+
+## 2. Run Tenderly Snap locally
+
+You can also set up Tenderly Snap locally. To achieve this, follow the steps below.
+
+### Clone the Repository
+
+First, download the app code onto your local machine by cloning this repository. For more information, find detailed instructions in the GitHub documentation.
+
+Note that you need a Tenderly account to use Tenderly Snap, so make sure to create it as described above.
+
+### Start the app
+
+After cloning the repository, go to the root project directory in your terminal. Next, run the `yarn start` command to start the app. Once done, you can access it on http://localhost:8000.
+
+Use the following command to clone the repository:
+
+```
+git clone https://github.com/Tenderly/tenderly-snap.git
+```
+
+Next, go to the root project directory:
+
+```
+cd tenderly-snap
+```
+
+Finally, start the app using:
+
+```
 yarn install && yarn start
 ```
 
-## Cloning
+Congrats, you’ve successfully installed Tenderly Snap on your local machine. You can now use Tenderly TX Preview. If you come across any issues, feel free to reach out to our support team at support@tenderly.co. We're happy to help! 💜
 
-This repository contains GitHub Actions that you may find useful, see `.github/workflows` and [Releasing & Publishing](https://github.com/MetaMask/template-snap-monorepo/edit/main/README.md#releasing--publishing) below for more information.
+# Author
 
-If you clone or create this repository outside the MetaMask GitHub organization, you probably want to run `./scripts/cleanup.sh` to remove some files that will not work properly outside the MetaMask GitHub organization.
+- Vanja Paunović ([@dzimiks](https://twitter.com/dzimiks))
 
-Note that the `action-publish-release.yml` workflow contains a step that publishes the frontend of this snap (contained in the `public/` directory) to GitHub pages. If you do not want to publish the frontend to GitHub pages, simply remove the step named "Publish to GitHub Pages" in that workflow.
+<br/>
 
-If you don't wish to use any of the existing GitHub actions in this repository, simply delete the `.github/workflows` directory.
-
-## Contributing
-
-### Testing and Linting
-
-Run `yarn test` to run the tests once.
-
-Run `yarn lint` to run the linter, or run `yarn lint:fix` to run the linter and fix any automatically fixable issues.
-
-### Releasing & Publishing
-
-The project follows the same release process as the other libraries in the MetaMask organization. The GitHub Actions [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) and [`action-publish-release`](https://github.com/MetaMask/action-publish-release) are used to automate the release process; see those repositories for more information about how they work.
-
-1. Choose a release version.
-
-- The release version should be chosen according to SemVer. Analyze the changes to see whether they include any breaking changes, new features, or deprecations, then choose the appropriate SemVer version. See [the SemVer specification](https://semver.org/) for more information.
-
-2. If this release is backporting changes onto a previous release, then ensure there is a major version branch for that version (e.g. `1.x` for a `v1` backport release).
-
-- The major version branch should be set to the most recent release with that major version. For example, when backporting a `v1.0.2` release, you'd want to ensure there was a `1.x` branch that was set to the `v1.0.1` tag.
-
-3. Trigger the [`workflow_dispatch`](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch) event [manually](https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow) for the `Create Release Pull Request` action to create the release PR.
-
-- For a backport release, the base branch should be the major version branch that you ensured existed in step 2. For a normal release, the base branch should be the main branch for that repository (which should be the default value).
-- This should trigger the [`action-create-release-pr`](https://github.com/MetaMask/action-create-release-pr) workflow to create the release PR.
-
-4. Update the changelog to move each change entry into the appropriate change category ([See here](https://keepachangelog.com/en/1.0.0/#types) for the full list of change categories, and the correct ordering), and edit them to be more easily understood by users of the package.
-
-- Generally any changes that don't affect consumers of the package (e.g. lockfile changes or development environment changes) are omitted. Exceptions may be made for changes that might be of interest despite not having an effect upon the published package (e.g. major test improvements, security improvements, improved documentation, etc.).
-- Try to explain each change in terms that users of the package would understand (e.g. avoid referencing internal variables/concepts).
-- Consolidate related changes into one change entry if it makes it easier to explain.
-- Run `yarn auto-changelog validate --rc` to check that the changelog is correctly formatted.
-
-5. Review and QA the release.
-
-- If changes are made to the base branch, the release branch will need to be updated with these changes and review/QA will need to restart again. As such, it's probably best to avoid merging other PRs into the base branch while review is underway.
-
-6. Squash & Merge the release.
-
-- This should trigger the [`action-publish-release`](https://github.com/MetaMask/action-publish-release) workflow to tag the final release commit and publish the release on GitHub.
-
-7. Publish the release on npm.
-
-- Be very careful to use a clean local environment to publish the release, and follow exactly the same steps used during CI.
-- Use `npm publish --dry-run` to examine the release contents to ensure the correct files are included. Compare to previous releases if necessary (e.g. using `https://unpkg.com/browse/[package name]@[package version]/`).
-- Once you are confident the release contents are correct, publish the release using `npm publish`.
-
-## Notes
-
-- Babel is used for transpiling TypeScript to JavaScript, so when building with the CLI,
-  `transpilationMode` must be set to `localOnly` (default) or `localAndDeps`.
+The repo is made using [@metamask/template-snap-monorepo](https://github.com/MetaMask/template-snap-monorepo).
