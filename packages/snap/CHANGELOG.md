@@ -6,9 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3]
+### Fix
+- Fix workflow issues
+
 ## [0.1.2]
 ### Added
 - Add Tenderly Snap implementation
 
-[Unreleased]: https://github.com/Tenderly/tenderly-snap/compare/@tenderly/metamask-snap@0.1.2...HEAD
-[0.1.2]: https://github.com/Tenderly/tenderly-snap/releases/tag/@tenderly/metamask-snap@0.1.2
+[Unreleased]: https://github.com/Tenderly/tenderly-snap/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Tenderly/tenderly-snap/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/Tenderly/tenderly-snap/releases/tag/v0.1.2
