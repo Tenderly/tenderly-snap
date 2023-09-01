@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "description": "A MetaMask Snap with transaction preview powered by Tenderly Simulation API.",
+  "keywords": [
+    "metamask",
+    "metamask-snap",
+    "tenderly",
+    "web3",
+    "blockchain",
+    "ethereum"
+  ],
   "homepage": "https://github.com/Tenderly/tenderly-snap#readme",
   "bugs": {
     "url": "https://github.com/Tenderly/tenderly-snap/issues"

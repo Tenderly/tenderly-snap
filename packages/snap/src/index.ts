@@ -7,7 +7,9 @@ import { hasProperty, isObject } from '@metamask/utils';
 import {
   handleSendTenderlyTransaction,
   handleUpdateTenderlyCredentials,
+  handleSetTenderlyCredentials,
   simulate,
+  isTenderlyDomain,
 } from './tenderly';
 import { CustomRequestMethod } from './constants';
 
@@ -25,6 +27,15 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
   switch (request.method) {
     case CustomRequestMethod.UPDATE_TENDERLY_CREDENTIALS:
       return handleUpdateTenderlyCredentials(origin);
+    case CustomRequestMethod.SET_TENDERLY_CREDENTIALS: {
+      if (!isTenderlyDomain(origin)) {
+        throw new Error(
+          'The origin of the request must be sent from the Tenderly domain.',
+        );
+      }
+
+      return handleSetTenderlyCredentials(request);
+    }
     case CustomRequestMethod.SEND_TENDERLY_TRANSACTION:
       return handleSendTenderlyTransaction(origin);
     default:

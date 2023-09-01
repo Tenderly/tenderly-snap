@@ -89,3 +89,21 @@ export const formatAmount = (amount: string, decimals = 4) => {
 
   return formatNumber(bnValue.toString(), decimals);
 };
+
+export const isTenderlyDomain = (origin: string) => {
+  if (!origin) {
+    return false;
+  }
+
+  try {
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/URL
+    const referrer: URL = new URL(origin);
+
+    return (
+      referrer.protocol === 'https:' &&
+      referrer.host.endsWith('dashboard.tenderly.co')
+    );
+  } catch (error) {
+    return false;
+  }
+};
