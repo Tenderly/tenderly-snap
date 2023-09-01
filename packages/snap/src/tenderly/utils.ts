@@ -95,5 +95,15 @@ export const isTenderlyDomain = (origin: string) => {
     return false;
   }
 
-  return origin.includes('tenderly.co');
+  try {
+    // Reference: https://developer.mozilla.org/en-US/docs/Web/API/URL
+    const referrer: URL = new URL(origin);
+
+    return (
+      referrer.protocol === 'https:' &&
+      referrer.host.endsWith('dashboard.tenderly.co')
+    );
+  } catch (error) {
+    return false;
+  }
 };
