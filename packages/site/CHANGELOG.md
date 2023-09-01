@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [1.1.0]
-### Uncategorized
-- feat: add set Tenderly credentials method
+### Added
+- Add SET_TENDERLY_CREDENTIALS constant
 
 ## [1.0.0]
 ### Security
