@@ -89,3 +89,11 @@ export const formatAmount = (amount: string, decimals = 4) => {
 
   return formatNumber(bnValue.toString(), decimals);
 };
+
+export const isTenderlyDomain = (origin: string) => {
+  if (!origin) {
+    return false;
+  }
+
+  return origin.includes('tenderly.co');
+};
