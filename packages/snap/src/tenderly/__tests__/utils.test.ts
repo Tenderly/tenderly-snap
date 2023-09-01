@@ -6,6 +6,10 @@ describe('Tenderly Utils', () => {
     it('returns true', () => {
       expect(isTenderlyDomain('https://dashboard.tenderly.co')).toBe(true);
       expect(isTenderlyDomain('https://dashboard.tenderly.co/')).toBe(true);
+      expect(
+        isTenderlyDomain('https://dashboard.tenderly.co/account/authorization'),
+      ).toBe(true);
+
       expect(isTenderlyDomain('https://dashboard.tenderly.co?test=123')).toBe(
         true,
       );
@@ -30,6 +34,9 @@ describe('Tenderly Utils', () => {
       expect(isTenderlyDomain('https://tenderly.com')).toBe(false);
       expect(isTenderlyDomain('https://google.com/tenderly.co')).toBe(false);
       expect(isTenderlyDomain('https://tenderly.co.website.com')).toBe(false);
+      expect(
+        isTenderlyDomain('https://dashboard.tenderly.co.website.com'),
+      ).toBe(false);
       expect(isTenderlyDomain('https://status.tenderly.co')).toBe(false);
       expect(isTenderlyDomain('https://tenderly.co')).toBe(false);
       expect(isTenderlyDomain('https://tenderly.co/devnets')).toBe(false);
