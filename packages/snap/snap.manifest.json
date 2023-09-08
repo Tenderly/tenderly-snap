@@ -1,13 +1,13 @@
 {
   "version": "1.1.0",
-  "description": "A MetaMask Snap with transaction preview powered by Tenderly Simulation API.",
-  "proposedName": "Tenderly Tx Preview",
+  "description": "Preview transactions before sending them on-chain to get valuable insights, avoid failed transactions, and save funds. Get human-readable information on transferred assets with corresponding dollar values for ERC-20 tokens and NFTs.",
+  "proposedName": "Tenderly TX Preview",
   "repository": {
     "type": "git",
     "url": "https://github.com/tenderly/tenderly-snap.git"
   },
   "source": {
-    "shasum": "rJPQVETMQ5nKH85ThwyqHkneEywg7bIuZqSkGCzpBmc=",
+    "shasum": "TouvEgll0kn1XNEjgUXQi0JzpjEKeS0a5GbpdxnuosA=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

@@ -10,12 +10,8 @@ export type TenderlyCredentials = {
 
 /**
  * Fetches the credentials associated with Tenderly project.
- *
- * @param origin - The origin of the request.
  */
-export async function fetchCredentials(
-  origin: string,
-): Promise<TenderlyCredentials | null> {
+export async function fetchCredentials(): Promise<TenderlyCredentials | null> {
   const persistedData: any = await snap.request({
     method: 'snap_manageState',
     params: {
@@ -24,7 +20,6 @@ export async function fetchCredentials(
   });
 
   if (!persistedData) {
-    await handleUpdateTenderlyCredentials(origin);
     return null;
   }
 
