@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0]
+### Uncategorized
+- chore: update manifest
+- feat: update credentials fetching and improve error handling
+
 ## [1.1.0]
 ### Added
 - Add set Tenderly credentials method
@@ -23,7 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add Tenderly Snap implementation
 
-[Unreleased]: https://github.com/Tenderly/tenderly-snap/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/Tenderly/tenderly-snap/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/Tenderly/tenderly-snap/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Tenderly/tenderly-snap/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Tenderly/tenderly-snap/compare/v0.1.3...v1.0.0
 [0.1.3]: https://github.com/Tenderly/tenderly-snap/compare/v0.1.2...v0.1.3
