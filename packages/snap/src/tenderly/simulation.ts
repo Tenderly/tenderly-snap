@@ -44,10 +44,14 @@ export async function simulate(
   transaction: { [key: string]: Json },
   transactionOrigin: string,
 ): Promise<Panel> {
-  const credentials = await fetchCredentials(transactionOrigin);
+  const credentials: TenderlyCredentials | null = await fetchCredentials();
 
   if (!credentials) {
-    return panel([text('🚨 Tenderly access token updated. Please try again.')]);
+    return panel([
+      text(
+        '🚨 Your Tenderly credentials seem incorrect or incomplete. Please visit https://dashboard.tenderly.co/account/authorization and connect to Tenderly Snap. If the issue persists, reach out to metamask.snap@tenderly.co for further assistance.',
+      ),
+    ]);
   }
 
   // Get chain id
