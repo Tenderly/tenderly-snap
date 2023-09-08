@@ -36,6 +36,12 @@ By previewing transactions before sending, you can avoid unnecessary gas costs, 
 
 With this in-depth information about your transactions, you can understand their exact financial implications, avoid any hidden security risks, and save valuable resources.
 
+<div align="center">
+    <a href="https://youtu.be/E8TGyDlV8wQ">
+        <img src="https://img.youtube.com/vi/E8TGyDlV8wQ/maxresdefault.jpg" alt="Tenderly" width="100%" height="auto" style="background-color: #ffffffb2; padding: 10px 20px; margin-bottom: 20px; box-sizing: border-box; max-width:200px;" />
+    </a>
+</div>
+
 # Setup
 
 To start using Tenderly TX Preview, you can set it up using the Tenderly Dashboard or run it locally. Follow a few simple steps to get started.
@@ -49,6 +55,8 @@ First, you need a Tenderly account to start using the TX Preview feature. To set
 Next, generate a Tenderly access token to allow Tenderly Snap to connect to your Tenderly account. This is a unique identifier that you can on the following link https://dashboard.tenderly.co/account/authorization.
 
 By clicking the **Connect to Tenderly Snap** button, you’ll automatically install Tenderly Snap and be able to use Tenderly TX Preview.
+
+<img width="603" alt="image" src="https://github.com/Tenderly/tenderly-snap/assets/26412515/7273a10a-63ea-4523-a97a-1906f758e9f3">
 
 ## 2. Run Tenderly Snap locally
 
