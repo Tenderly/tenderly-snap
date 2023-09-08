@@ -7,9 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [1.2.0]
-### Uncategorized
-- chore: update manifest
-- feat: update credentials fetching and improve error handling
+### Fixed
+- Update credentials fetching and improve error handling
 
 ## [1.1.0]
 ### Added
