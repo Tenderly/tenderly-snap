@@ -6,4 +6,6 @@ enum CustomRequestMethod {
 
 const TenderlyApi = 'https://api.tenderly.co/api';
 
-export { CustomRequestMethod, TenderlyApi };
+const TenderlySnapVersion = '1.2.0';
+
+export { CustomRequestMethod, TenderlyApi, TenderlySnapVersion };

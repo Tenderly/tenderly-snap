@@ -1,6 +1,6 @@
 import { divider, heading, panel, Panel, text } from '@metamask/snaps-ui';
 import { Json } from '@metamask/utils';
-import { TenderlyApi } from '../constants';
+import { TenderlyApi, TenderlySnapVersion } from '../constants';
 import { fetchCredentials, TenderlyCredentials } from './credentials-access';
 import { formatResponse, formatSimulationUrl } from './formatter';
 import { hex2int, requestSnapPrompt } from './utils';
@@ -127,7 +127,7 @@ async function submitSimulation(
         save: true,
         save_if_fails: true,
         simulation_type: 'full',
-        source: `Tenderly Snap: ${transactionOrigin}`,
+        source: `Tenderly Snap ${TenderlySnapVersion}: ${transactionOrigin}`,
       }),
       headers: {
         'Content-Type': 'application/json',

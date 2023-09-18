@@ -144,7 +144,7 @@ export function formatSimulationUrl(
   credentials: TenderlyCredentials,
 ): Component[] {
   const simulationUrl = `https://dashboard.tenderly.co/${credentials.accountId}/${credentials.projectId}/simulator/${data.simulation?.id}`;
-  const sharedSimulationUrl = `https://dashboard.tenderly.co/shared/simulation/${data.simulation?.id}`;
+  const sharedSimulationUrl = `https://tdly.co/shared/simulation/${data.simulation?.id}`;
 
   return [
     heading('Tenderly Dashboard'),
