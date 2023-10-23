@@ -98,4 +98,5 @@ Congrats, you’ve successfully installed Tenderly Snap on your local machine. Y
 
 <br/>
 
-The repo is made using [@metamask/template-snap-monorepo](https://github.com/MetaMask/template-snap-monorepo).
+The repo was made using the [@metamask/template-snap-monorepo](https://github.com/MetaMask/template-snap-monorepo) and
+inspired by the [open-source repo](https://github.com/halo3mic/tenderly-snap) by [Miha Lotric](https://twitter.com/mihalotric).
