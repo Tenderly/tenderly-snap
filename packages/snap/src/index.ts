@@ -51,11 +51,13 @@ export const onRpcRequest: OnRpcRequestHandler = ({ origin, request }) => {
  *
  * @param args - The request handler args as object.
  * @param args.transaction - The transaction to handle.
- * @param args.transactionOrigin -  The transaction origin.
+ * @param args.transactionOrigin - The transaction origin.
+ * @param args.chainId - The chain ID of the transaction.
  */
 export const onTransaction: OnTransactionHandler = async ({
   transaction,
   transactionOrigin,
+  chainId,
 }) => {
   if (!isObject(transaction) || !hasProperty(transaction, 'to')) {
     return {
@@ -67,6 +69,7 @@ export const onTransaction: OnTransactionHandler = async ({
   }
 
   const simulationResponse = await simulate(
+    chainId,
     transaction,
     transactionOrigin || '',
   );
