@@ -109,15 +109,15 @@ export const isTenderlyDomain = (origin: string) => {
 };
 
 /**
- * Parses a chain ID string and returns the formatted hexadecimal chain ID.
+ * Parses a CAIP-2 compliant chain ID string and returns the formatted hexadecimal chain ID.
  *
- * This function takes a chain ID string in the format "eip155:networkId",
- * extracts the network ID, and returns it as a hexadecimal string
- * prefixed with "0x".
+ * This function takes a CAIP-2 chain ID string in the format "namespace:reference",
+ * validates the namespace, and for "eip155" namespace, formats the reference as a
+ * lowercase hexadecimal string prefixed with "0x".
  *
- * @param chainId - The chain ID string to parse (e.g., "eip155:1").
- * @returns The formatted hexadecimal chain ID (e.g., "0x1").
- * @throws {Error} If the input format is invalid or processing fails.
+ * @param chainId - The CAIP-2 chain ID string to parse (e.g., "eip155:1").
+ * @returns The formatted hexadecimal chain ID (e.g., "0x1") for eip155 namespace.
+ * @throws {Error} If the input format is invalid, or processing fails.
  * @example
  * parseChainId("eip155:1") // returns "0x1"
  * parseChainId("eip155:a86a") // returns "0xa86a"
@@ -125,15 +125,14 @@ export const isTenderlyDomain = (origin: string) => {
  */
 export const parseChainId = (chainId: string): string => {
   try {
-    // Split the chainId string by ':' and get the last part
-    const parts = chainId.split(':');
-    const networkId = parts[parts.length - 1];
+    // Split the chainId string
+    const [, reference] = chainId.split(':');
 
-    // Append '0x' to the networkId
-    return `0x${networkId}`;
+    // Append '0x' to the reference and return
+    return `0x${reference}`;
   } catch (error) {
     throw new Error(
-      `An unexpected error occurred while parsing chainId (${chainId}): ${error.message}`,
+      `An unexpected error occurred while parsing CAIP-2 chainId (${chainId}): ${error.message}`,
     );
   }
 };
