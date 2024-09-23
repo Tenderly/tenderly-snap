@@ -3,7 +3,7 @@ import { Json } from '@metamask/utils';
 import { TenderlyApi, TenderlySnapVersion } from '../constants';
 import { fetchCredentials, TenderlyCredentials } from './credentials-access';
 import { formatResponse, formatSimulationUrl } from './formatter';
-import { hex2int, requestSnapPrompt } from './utils';
+import { hex2int, parseChainId, requestSnapPrompt } from './utils';
 
 /**
  * Updates the credentials associated with Tenderly project.
@@ -37,13 +37,19 @@ export async function fetchPublicTenderlyNetworks() {
  * handles any errors returned by the API, and if there are no errors,
  * formats the response received from the Tenderly API for output.
  *
+ * @param chainIdOrigin - The chain ID of the transaction.
  * @param transaction - The transaction to simulate.
  * @param transactionOrigin - The origin of the transaction.
  */
 export async function simulate(
+  chainIdOrigin: string,
   transaction: { [key: string]: Json },
   transactionOrigin: string,
 ): Promise<Panel> {
+  if (!chainIdOrigin) {
+    throw new Error('Chain ID is not provided.');
+  }
+
   const credentials: TenderlyCredentials | null = await fetchCredentials();
 
   if (!credentials) {
@@ -54,13 +60,8 @@ export async function simulate(
     ]);
   }
 
-  // Get chain id
-  const chainId = await ethereum.request({ method: 'eth_chainId' });
-  const networkId = hex2int(chainId as string);
-
-  if (!chainId) {
-    throw new Error('Chain ID is not provided.');
-  }
+  const chainId: string = parseChainId(chainIdOrigin);
+  const networkId = hex2int(chainId);
 
   // Fetch Tenderly-supported networks
   const tenderlyNetworks = await fetchPublicTenderlyNetworks();
