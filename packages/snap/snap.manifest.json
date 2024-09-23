@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Preview transactions before sending them on-chain to get valuable insights, avoid failed transactions, and save funds. Get human-readable information on transferred assets with corresponding dollar values for ERC-20 tokens and NFTs.",
   "proposedName": "Tenderly TX Preview",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/tenderly/tenderly-snap.git"
   },
   "source": {
-    "shasum": "5cRgUkIM5DUnrcysawb1az3in+dJ0tMwWWOG9PF1wSQ=",
+    "shasum": "JNLIjh3TKVEi5tyOrY975mbE9GYvtA6ruLcmilpZvPc=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
