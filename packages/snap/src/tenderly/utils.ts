@@ -120,16 +120,15 @@ export const isTenderlyDomain = (origin: string) => {
  * @throws {Error} If the input format is invalid, or processing fails.
  * @example
  * parseChainId("eip155:1") // returns "0x1"
- * parseChainId("eip155:a86a") // returns "0xa86a"
- * parseChainId("eip155:76adf1") // returns "0x76adf1"
+ * parseChainId("eip155:11155111") // returns "0xaa36a7"
  */
 export const parseChainId = (chainId: string): string => {
   try {
     // Split the chainId string
     const [, reference] = chainId.split(':');
 
-    // Append '0x' to the reference and return
-    return `0x${reference}`;
+    // Convert the reference from base 10 to hexadecimal and prefix with '0x'
+    return `0x${parseInt(reference, 10).toString(16)}`;
   } catch (error) {
     throw new Error(
       `An unexpected error occurred while parsing CAIP-2 chainId (${chainId}): ${error.message}`,
