@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.2.3]
 ### Fixed
-- fix: update chain id logic
+- Update chain id logic
 
 ## [1.2.2]
 ### Fixed
