@@ -1,6 +1,6 @@
 {
   "name": "@tenderly/metamask-snap",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Preview transactions before sending them on-chain to get valuable insights, avoid failed transactions, and save funds. Get human-readable information on transferred assets with corresponding dollar values for ERC-20 tokens and NFTs.",
   "repository": {
     "type": "git",
